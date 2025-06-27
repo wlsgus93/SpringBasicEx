@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>계산기예제</title>
+  <style>
+    @font-face {
+        font-family: exqt;
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2506-1@1.0/exqt.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    body {
+        font-family: exqt;
+        background-color: #f7ff00;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h1 {
+        color: #db36a4;
+        max-width: 400px;
+        margin: 20px auto;
+    }
+
+    form {
+        background: #db36a4;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0,0,0,.5);
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        background-color: green;
+    }
+
+    input, select {
+        width: 100%;
+        background-color: #f7ff00;
+        color: #db36a4;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        border: 1px solid #0c0c0c;
+        font-size: 24px;
+    }
+
+    button {
+        background-color: #f7ff00;
+        color: #db36a4;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .result, .error {
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 15px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .result {
+        background-color: #e7f3fe;
+        color: #31708f;
+    }
+
+    .error {
+        background-color: #f2dede;
+        color: #a94442;
+    }
+  </style>
+</head>
+<body>
+<h1>Awesome한 계산기</h1>
+<div style="text-align: center; margin-bottom: 20px;">
+  <a th:href="@{/}">
+    <button style="font-family: exqt; background-color: #db36a4; color: white;">메인 메뉴로</button>
+  </a>
+</div>
+<form th:action="@{/calculator}" method="post">
+  <label for="num1">Number 1:</label>
+  <input type="number" step="any" id="num1" name="num1" required/>
+
+  <label for="num2">Number 2:</label>
+  <input type="number" step="any" id="num2" name="num2" required/>
+
+  <label for="operation">Operation: </label>
+  <select id="operation" name="operation">
+    <option value="add">Add (+)</option>
+    <option value="subtract">Subtract (-)</option>
+    <option value="multiply">Multiply (×)</option>
+    <option value="divide">Divide (÷)</option>
+  </select>
+
+  <button type="submit" style="font-family: exqt">Calculate</button>
+</form>
+
+<div th:if="${errorMessage}" class="error">
+  <p th:text="${errorMessage}"></p>
+</div>
+
+<div th:if="${result}" class="result">
+  <h2>Result: <span th:text="${result}"></span></h2>
+</div>
+</body>
+</html>
