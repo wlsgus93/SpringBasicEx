@@ -40,6 +40,20 @@ public class TodoController {
 
         return "redirect:/todos";
     }
+    @PostMapping("/todos/toggle")
+    public String toggleComplete(@RequestParam("taskId") int taskId) {
+        toDoService.toggleTaskCompletion(taskId);
 
+        return "redirect:/todos";
+    }
+    @PostMapping("/todos/update")
+    public String updateTask(
+            @RequestParam("taskId") int taskId,
+            @RequestParam("newDescription") String newDescription
+    ) {
+        toDoService.updateTask(taskId, newDescription);
+
+        return "redirect:/todos";
+    }
 
 }
