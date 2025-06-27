@@ -27,7 +27,6 @@ h1 {
 form {
     display: flex;
     justify-content: center;
-    margin-bottom: 25px;
 }
 
 input[type="text"] {
@@ -78,4 +77,32 @@ button:hover {
     display: flex;
     align-items: center;
     gap: 10px;
+    justify-content: space-between;
+    padding: 1.5vh 0;
+}
+.todo-list li form {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0;
+}
+
+.todo-list li input[type="text"] {
+    height: 32px;
+    font-size: 14px;
+    padding: 5px 8px;
+}
+
+.todo-list li button {
+    height: 34px;
+    font-size: 14px;
+    padding: 5px 12px;
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #5cb85c;
+    cursor: pointer;
+    margin-right: 5px;
 }

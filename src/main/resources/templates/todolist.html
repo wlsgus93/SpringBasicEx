@@ -3,32 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <title>To Do List</title>
-    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
 </head>
 <body>
 <div class="container">
     <h1>To Do List입니다.</h1>
     <div style="margin-bottom: 20px;">
         <a th:href="@{/}">
-            <button style="background-color: #444; color: white; padding: 8px 16px; border-radius: 4px; border: none;">메인 메뉴로</button>
+            <button style="background-color: #444; color: white; padding: 8px 16px; border-radius: 4px; border: none;">
+                메인 메뉴로
+            </button>
         </a>
     </div>
     <form th:action="@{/todos}" method="post">
-        <input type="text" name="task" placeholder="Enter a new task" required  />
+        <input type="text" name="task" placeholder="Enter a new task" required/>
         <button type="submit">투두 추가</button>
     </form>
-    <div class="todo-list">
-        <ul>
-            <li th:each="task: ${todos}">
-                <span th:text="${task.description}"></span>
-                <form th:action="@{/todos/delete}" method="post" style="display:inline;">
-                    <input type="hidden" name="taskId" th:value="${task.id}"/>
-                    <button type="submit">Delete</button>
-                </form>
-            </li>
+    <div>
+        <ul style="list-style-type: none;">
+            <li th:each="task : ${todos}" style="margin-bottom: 16px;">
+                <!-- 보기 상태 -->
+                <div th:id="'view-' + ${task.id}" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <form th:action="@{/todos/toggle}" method="post">
+                            <input type="hidden" name="taskId" th:value="${task.id}" />
+                            <input type="checkbox" onclick="this.form.submit()" th:checked="${task.completed}" />
+                        </form>
+                        <span th:text="${task.description}"></span>
+                    </div>
+                    <div>
+                        <button type="button"
+                                th:attr="data-id=${task.id}, data-description=${task.description}"
+                                onclick="showEditForm(this)">
+                            Update
+                        </button>
+                        <form th:action="@{/todos/delete}" method="post" style="display:inline;">
+                            <input type="hidden" name="taskId" th:value="${task.id}" />
+                            <button type="submit">Delete</button>
+                        </form>
+                    </div>
+                </div>
 
+                <!-- 수정 상태 -->
+                <div th:id="'edit-form-' + ${task.id}" style="display: none; margin-top: 8px;">
+                    <form th:action="@{/todos/update}" method="post" style="display: flex; gap: 8px; align-items: center;">
+                        <input type="hidden" name="taskId" th:value="${task.id}" />
+                        <input type="text" name="newDescription"
+                               th:id="'input-' + ${task.id}" style="width: 60%;" required />
+                        <button type="submit">Edit</button>
+                        <button type="button" th:attr="onclick=|cancelEditForm(${task.id})|">Cancel</button>
+                    </form>
+                </div>
+            </li>
         </ul>
     </div>
 </div>
+<script>
+    function showEditForm(buttonElement) {
+        const taskId = buttonElement.dataset.id;
+        const description = buttonElement.dataset.description;
+
+        // 숨김/표시 처리
+        document.getElementById("view-" + taskId).style.display = "none";
+        const editForm = document.getElementById("edit-form-" + taskId);
+        editForm.style.display = "block";
+
+        // input 채우고 focus
+        const input = document.getElementById("input-" + taskId);
+        input.value = description;
+        input.focus();
+    }
+
+    function cancelEditForm(taskId) {
+        document.getElementById("edit-form-" + taskId).style.display = "none";
+        document.getElementById("view-" + taskId).style.display = "flex";
+    }
+</script>
+
 </body>
 </html>
