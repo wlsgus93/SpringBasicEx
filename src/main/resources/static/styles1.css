@@ -1,0 +1,115 @@
+/* 기본 배경과 폰트 */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff8dc;
+    font-family: "Courier New", Courier, monospace;
+    color: #333;
+}
+
+/* 헤더 */
+h1 {
+    text-align: center;
+    padding: 20px;
+    font-size: 32px;
+    background-color: #f4e2d8;
+    margin: 0;
+    border-bottom: 2px solid #e2cfcf;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* 폼 */
+.add-form {
+    max-width: 600px;
+    margin: 30px auto;
+    background-color: #fffdf5;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e2cfcf;
+    box-shadow: 2px 4px 8px rgba(0,0,0,0.1);
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #d3b8ae;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #fefcf8;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #b5838d;
+    outline: none;
+}
+
+/* 버튼 */
+button {
+    padding: 10px 16px;
+    background-color: #b5838d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #9f5f7f;
+}
+
+/* 목록 */
+ul {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none;
+}
+
+li {
+    background-color: #fffdf5;
+    border: 1px solid #e2cfcf;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 1px 3px 6px rgba(0,0,0,0.08);
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+li h3 {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+    color: #5a3e36;
+}
+
+li p {
+    margin: 0;
+    font-size: 16px;
+    white-space: pre-wrap;
+}
+
+/* 수정·삭제 링크 */
+.actions {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}
+
+.actions a {
+    margin-right: 8px;
+    color: #333;
+    text-decoration: none;
+}
+
+.actions a:hover {
+    text-decoration: underline;
+}

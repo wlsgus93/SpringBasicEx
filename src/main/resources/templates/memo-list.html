@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>메모장</title>
+    <link rel="stylesheet" th:href="@{/styles1.css}"/>
+</head>
+<body>
+<h1>간단 메모장</h1>
+
+<form class="add-form" th:action="@{/add}" method="post">
+    <input type="text" name="title" placeholder="제목을 입력하세요" required/>
+    <br/>
+    <textarea name="content" placeholder="내용을 입력하세요" required></textarea>
+    <br/>
+    <button type="submit">메모 추가</button>
+</form>
+
+<ul>
+    <li th:each="memo: ${memos}">
+        <div>
+            <h3 th:text="${memo.title}"></h3>
+            <p th:text="${memo.content}"></p>
+        </div>
+        <div class="action">
+            <a class="action" th:href="@{'/edit/' + ${memo.id}}">수정</a>
+            <form th:action="@{/delete}" method="post" style="display:inline;">
+                <input type="hidden" name="id" th:value="${memo.id}"/>
+                <button type="submit">삭제</button>
+            </form>
+        </div>
+    </li>
+</ul>
+</body>
+</html>
