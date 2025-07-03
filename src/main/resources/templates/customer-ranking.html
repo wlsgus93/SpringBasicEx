@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>고객별 소비 랭킹</title>
+    <link rel="stylesheet" th:href="@{/dash_style.css}"/>
+</head>
+<body>
+<h1>🏆 고객별 누적 소비 랭킹</h1>
+
+<p class="nav-link">
+    <a href="/sales/add">➕ 신규 매출 등록하기</a>
+</p>
+
+<table>
+    <thead>
+    <tr>
+        <th>순위</th>
+        <th>고객 ID</th>
+        <th>누적 소비액</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="rank: ${ranks}">
+        <td th:text="${rank.rank}">1</td>
+        <td th:text="${rank.customerId}">1001</td>
+        <td th:text="${#numbers.formatDecimal(rank.totalSpent, 0, 'COMMA', 2, 'POINT')}">0</td>
+    </tr>
+    </tbody>
+</table>
+
+<p class="nav-link">
+    <a href="/daily-sales">← 일별 매출 요약으로 돌아가기</a>
+</p>
+</body>
+</html>

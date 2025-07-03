@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>매출 데이터 추가</title>
+    <link rel="stylesheet" th:href="@{/dash_style.css}" />
+</head>
+<body>
+<h1>➕ 신규 매출 입력</h1>
+
+<form th:action="@{/sales/add}" method="post" class="form-container">
+    <div class="form-row">
+        <label>판매일:
+            <input type="date" name="saleDate" required />
+        </label>
+    </div>
+    <div class="form-row">
+        <label>고객 ID:
+            <input type="number" name="customerId" min="1" required />
+        </label>
+    </div>
+    <div class="form-row">
+        <label>금액:
+            <input type="number" name="amount" step="0.01" min="0" required />
+        </label>
+    </div>
+    <div class="form-actions">
+        <button type="submit">저장</button>
+        <a href="/" class="cancel-link">취소</a>
+    </div>
+</form>
+</body>
+</html>

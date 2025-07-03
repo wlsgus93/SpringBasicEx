@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>일별 매출 요약</title>
+    <link rel="stylesheet" th:href="@{/dash_style.css}"/>
+</head>
+<body>
+<h1>📊 일별 매출 요약</h1>
+
+<p class="nav-link">
+    <a href="/sales/add">➕ 신규 매출 등록하기</a>
+</p>
+
+<table>
+    <thead>
+    <tr>
+        <th>날짜</th>
+        <th>총 매출액</th>
+        <th>주문수 </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sale: ${sales}">
+        <td th:text="${sale.saleDate}">2025-01-01</td>
+        <td th:text="${#numbers.formatDecimal(sale.totalAmount, 0, 'COMMA', 2, 'POINT')}">0</td>
+        <td th:text="${sale.orderCount}">0</td>
+    </tr>
+    </tbody>
+</table>
+
+<p class="nav-link">
+    <a href="/customer-ranking">고객별 소비 랭킹 보기 →</a>
+</p>
+</body>
+</html>
