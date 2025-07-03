@@ -2,12 +2,14 @@ package com.jkh.Example.repository;
 
 import com.jkh.Example.model.Memo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,7 +17,7 @@ import java.util.List;
 public class MemoRepository {
     private final JdbcTemplate jdbcTemplate;
 
-    public MemoRepository(JdbcTemplate jdbcTemplate) {
+    public MemoRepository(@Qualifier("memoJdbcTemplate") JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
     @Autowired
@@ -38,7 +40,7 @@ public class MemoRepository {
                     resultSet.getString("title"),
                     resultSet.getString("content")
             );
-
+    @Transactional("memoTransactionManager")
     public List<Memo> findAll() {
         System.out.println("APP_NAME: " + env.getProperty("APP_NAME"));
         return jdbcTemplate.query(
@@ -46,6 +48,7 @@ public class MemoRepository {
                 memoRowMapper
         );
     }
+    @Transactional("memoTransactionManager")
     public Memo findById(int id) {
         return jdbcTemplate.queryForObject(
                 "SELECT * FROM memo WHERE id = ?",
@@ -53,16 +56,18 @@ public class MemoRepository {
                 id
         );
     }
-
+    @Transactional("memoTransactionManager")
     public void save(String title, String content) {
         jdbcTemplate.update("INSERT INTO memo (title, content) VALUES (?, ?)", title, content);
     }
+    @Transactional("memoTransactionManager")
     public void delete(int id) {
         jdbcTemplate.update(
                 "DELETE FROM memo WHERE id = ?",
                 id
         );
     }
+    @Transactional("memoTransactionManager")
     public void update(int id, String title, String content) {
         jdbcTemplate.update(
                 "UPDATE memo SET title = ?, content = ? WHERE id = ?",
