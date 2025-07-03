@@ -1,21 +1,23 @@
 spring:
-  application:
-    name:${APP_NAME}
-  datasource:
-    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=disable
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-      format_sql: true
-    show-sql: true
+    application:
+      name: Example
+    datasource:
+      memo-app:
+        jdbc-url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=disable
+        username: ${DB_USERNAME}
+        password: ${DB_PASSWORD}
+        driver-class-name: org.postgresql.Driver
+      dashboard-db:
+        jdbc-url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DASHBOARD_DB_NAME}?sslmode=disable
+        username: ${DASHBOARD_DB_USERNAME}
+        password: ${DB_PASSWORD}
+        driver-class-name: org.postgresql.Driver
+
 
 #app:
 #  admin:
 #    password: ${ADMIN_PASSWORD}
-#
+#54.206.6.41
 #cloud:
 #  aws:
 #    credentials:
