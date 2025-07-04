@@ -3,6 +3,7 @@ package com.jkh.Example.repository;
 import com.jkh.Example.model.CustomerRank;
 import com.jkh.Example.model.DailySales;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -53,9 +54,15 @@ public class DashboardRepository {
     }
     @Transactional("dashboardTransactionManager")
     public void saveSale(LocalDate saleDate, int customerId, BigDecimal amount) {
-        jdbcTemplate.update(
-                "INSERT INTO sales (sale_date, customer_id, amount) VALUES (?, ?, ?)",
-                saleDate, customerId, amount
-        );
+        try {
+            jdbcTemplate.update(
+                    "INSERT INTO sales (sale_date, customer_id, amount) VALUES (?, ?, ?)",
+                    saleDate, customerId, amount
+            );
+        } catch (DataIntegrityViolationException e) {
+            System.out.println("큰 수");
+
+            e.getStackTrace();
+        }
     }
 }
