@@ -1,0 +1,103 @@
+/* 전체 배경 & 기본 폰트 */
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #FFF8F0; /* 연한 베이지 */
+  color: #5A4E4D;            /* 부드러운 브라운 */
+}
+
+/* 컨테이너 */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* 제목 */
+h1 {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 2rem;
+  color: #A27B5C; /* 파스텔 브라운 */
+}
+
+/* 내비게이션 링크 */
+a {
+  text-decoration: none;
+  color: #7DAEA3; /* 파스텔 민트 */
+  margin-right: 12px;
+}
+a:hover {
+  text-decoration: underline;
+  color: #60948C;
+}
+
+/* 버튼 */
+button, .btn {
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #E3C9C1; /* 파스텔 핑크 */
+  color: #5A4E4D;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+button:hover, .btn:hover {
+  background-color: #D3B6AE;
+}
+
+/* 표 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  background-color: #FFF5E4; /* 아주 연한 살구 */
+}
+th, td {
+  padding: 12px;
+  border: 1px solid #E3C9C1;
+  text-align: center;
+}
+th {
+  background-color: #F6E8E1; /* 파스텔 살구 */
+  color: #7D5A50;
+}
+
+/* 폼 */
+form, .form-container {
+  max-width: 600px;
+  margin: 0 auto 24px auto;
+  padding: 20px;
+  background-color: #FEF9F5; /* 거의 흰색에 가까운 살구 */
+  border: 1px solid #E3C9C1;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  border: 1px solid #E3C9C1;
+  border-radius: 6px;
+  background-color: #FFFBF8;
+  font-size: 1rem;
+}
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #7DAEA3; /* 포커스 시 파스텔 민트 */
+}
+
+/* 액션 링크(취소) */
+.cancel {
+  margin-left: 12px;
+  color: #A27B5C;
+}
+.cancel:hover {
+  color: #7D5A50;
+}
