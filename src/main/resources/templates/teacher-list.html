@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>‍🏫 교사 목록</title>
+    <link rel="stylesheet" th:href="@{/edu_styles.css}"/>
+</head>
+<body>
+<h1>🧑‍🏫 교사 목록</h1>
+
+<p>
+    <a href="/teachers">🏠 홈으로</a>
+    <a href="/teachers/add">➕ 교사 등록</a>
+</p>
+
+<table>
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>이름</td>
+        <td>액션</td>
+    </tr>
+    </thead>
+    <tbody th:each="teacher: ${teachers}">
+    <tr>
+        <td th:text="${teacher.id}"></td>
+        <td th:text="${teacher.name}"></td>
+        <td>
+            <a th:href="@{'/teachers/edit/' + ${teacher.id}}">수정</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
