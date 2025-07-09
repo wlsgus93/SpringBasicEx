@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${student.id} == null ? '➕ 학생 등록' : '✏️ 학생 수정'"></title>
+  <link rel="stylesheet" th:href="@{/edu_styles.css}"/>
+</head>
+<body>
+<h1 th:text="${student.id} == null ? '➕ 학생 등록' : '✏️ 학생 수정'"></h1>
+
+<p>
+  <a href="/edusystem">🏠 홈으로</a>
+  <a href="/students">👥 학생 목록</a>
+</p>
+
+<form th:action="${student.id} == null ? @{/students/add} : @{/students/edit}" th:object="${student}" method="post">
+  <input type="hidden" th:field="*{id}">
+  <p><label>이름: <input type="text" th:field="*{name}" required/></label></p>
+  <p><label>성적: <input type="text" th:field="*{score}" required/></label></p>
+  <p>
+    <label>
+      교사:
+      <select th:field="*{teacherId}" required>
+        <option th:each="teacher: ${teachers}" th:value="${teacher.id}" th:text="${teacher.name}"></option>
+      </select>
+    </label>
+  </p>
+  <p>
+    <button type="submit">저장</button>
+    <a href="/students">취소</a>
+  </p>
+</form>
+</body>
+</html>

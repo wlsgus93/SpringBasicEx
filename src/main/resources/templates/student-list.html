@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>👩‍🎓 학생 목록</title>
+    <link rel="stylesheet" th:href="@{/edu_styles.css}"/>
+</head>
+<body>
+<h1>👩‍🎓 학생 목록</h1>
+
+<p>
+    <a href="/edusystem">🏠 홈으로</a>
+    <a href="/students/add">➕ 학생 등록</a>
+</p>
+
+<table>
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>이름</td>
+        <td>성적</td>
+        <td>교사</td>
+        <td>액션</td>
+    </tr>
+    </thead>
+    <tbody th:each="student: ${students}">
+    <tr>
+        <td th:text="${student.id}"></td>
+        <td th:text="${student.name}"></td>
+        <td th:text="${student.score}"></td>
+        <td th:text="${student.teacherName} ?: '-'"></td>
+        <td>
+            <a th:href="@{'/students/edit/' + ${student.id}}">수정</a>
+            <form th:action="@{'/students/delete/' + ${student.id}}" method="post" style="display:inline;">
+                <button type="submit">삭제</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

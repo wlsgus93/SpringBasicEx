@@ -1,3 +1,4 @@
+<!-- ✅ 수정된 teacher-list.html -->
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -9,7 +10,7 @@
 <h1>🧑‍🏫 교사 목록</h1>
 
 <p>
-    <a href="/teachers">🏠 홈으로</a>
+    <a href="/edusystem">🏠 홈으로</a>
     <a href="/teachers/add">➕ 교사 등록</a>
 </p>
 
@@ -21,12 +22,18 @@
         <td>액션</td>
     </tr>
     </thead>
-    <tbody th:each="teacher: ${teachers}">
+    <tbody th:each="teacher : ${teachers}">
     <tr>
         <td th:text="${teacher.id}"></td>
         <td th:text="${teacher.name}"></td>
         <td>
+            <!-- ✅ 수정 링크 -->
             <a th:href="@{'/teachers/edit/' + ${teacher.id}}">수정</a>
+
+            <!-- ✅ 삭제 폼 (수정 필요했던 부분) -->
+            <form th:action="@{'/teachers/delete/' + ${teacher.id}}" method="post" style="display:inline;">
+                <button type="submit">삭제</button>
+            </form>
         </td>
     </tr>
     </tbody>
